@@ -1,5 +1,4 @@
 absl-py==1.2.0
-# aiohttp @ file:///tmp/build/80754af9/aiohttp_1646806365504/work
 aiosignal @ file:///tmp/build/80754af9/aiosignal_1637843061372/work
 alabaster @ file:///home/ktietz/src/ci/alabaster_1611921544520/work
 anyio @ file:///tmp/build/80754af9/anyio_1644463572971/work/dist
