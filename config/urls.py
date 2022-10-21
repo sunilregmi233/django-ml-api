@@ -18,6 +18,8 @@ from django.urls import path, include
 from rest_framework import permissions # new
 from drf_yasg.views import get_schema_view # new
 from drf_yasg import openapi # new
+from django.conf.urls.static import static
+from django.conf import settings
 
 schema_view = get_schema_view( # new
     openapi.Info(
@@ -43,4 +45,4 @@ urlpatterns = [
     path('api/v1/dj-rest-auth/registration/', include('dj_rest_auth.registration.urls')),
     path('swagger/', schema_view.with_ui( 'swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
-]
+]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
