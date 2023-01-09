@@ -1,10 +1,13 @@
-from tokenize import Token
+# from tokenize import Token
 from rest_framework import serializers
 from users.models import User, UserProfile
 from rest_framework.authtoken.models import Token
 
 from rest_framework.request import Request
 from rest_framework.test import APIRequestFactory
+
+from django.contrib.auth import authenticate
+from rest_framework import serializers
 
 factory = APIRequestFactory()
 request = factory.get('/')
@@ -13,6 +16,28 @@ request = factory.get('/')
 serializer_context = {
     'request': Request(request),
 }
+
+# class LoginSerializer(serializers.Serializer):
+#     email= serializers.EmailField()
+#     password = serializers.CharField()
+
+#     def authenticate(email, password):
+#         try:
+#             user = User.objects.get(email=email)
+#             if user.check_password(password):
+#                 return user
+#         except User.DoesNotExist:
+#             pass
+#         return None
+
+#     def validate(self, data):
+#         email = data.get("email", None)
+#         password = data.get("password", None)
+#         user = authenticate(email=email, password=password)
+#         print(user)
+#         if user is None:
+#             raise serializers.ValidationError("Invalid login credentials")
+#         return user
 
 class UserProfileSerializer(serializers.ModelSerializer):
     
@@ -26,7 +51,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = User
-        fields = ('url', 'email', 'first_name', 'last_name', 'password', 'profile', 'is_student', 'is_teacher')
+        fields = ('url', 'username', 'email', 'first_name', 'last_name', 'password', 'profile', 'is_staff')
         extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):
@@ -65,10 +90,14 @@ class TokenSerializer(serializers.ModelSerializer):
 
     def get_user_type(self, obj):
         serializer_data = UserSerializer(obj.user, context=serializer_context).data
-        # is_staff = serializer_data.get('is_staff')
+        print(serializer_data)
+        username = serializer_data.get('username')
+        is_staff = serializer_data.get('is_staff')
         # is_student = serializer_data.get('is_student')
         # is_teacher = serializer_data.get('is_teacher')
-        # return {
-        #     'is_student': is_student,
-        #     'is_teacher': is_teacher
-        # }
+        return {
+            'is_staff': is_staff,
+            'username': username,
+            # 'is_student': is_student,
+            # 'is_teacher': is_teacher
+        }
