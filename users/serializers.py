@@ -1,10 +1,12 @@
-from tokenize import Token
 from rest_framework import serializers
 from users.models import User, UserProfile
 from rest_framework.authtoken.models import Token
 
 from rest_framework.request import Request
 from rest_framework.test import APIRequestFactory
+
+from django.contrib.auth import authenticate
+from django.contrib.auth.models import User
 
 factory = APIRequestFactory()
 request = factory.get('/')
@@ -19,6 +21,35 @@ class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserProfile
         fields = ('title', 'dob', 'address', 'country', 'city', 'zip', 'photo')
+
+# class LoginSerializer(serializers.Serializer):
+#     username = serializers.CharField(required=True, allow_blank=True)
+#     password = serializers.CharField(style={'input_type': 'password'})
+
+#     class Meta:
+#         model = User
+#         fields = ( 'username', 'password')
+
+#     # def authenticate(email, password):
+#     #     try:
+#     #         user = User.objects.get(email=email)
+#     #         print(user)
+#     #         if user.check_password(password):
+#     #             return user
+#     #     except User.DoesNotExist:
+#     #         pass
+#     #     return None
+    
+#     def validate(self, data):
+#         print(data)
+#         user = authenticate(username=data['username'], password=data['password'])
+#         print (f"The user is: {user}")
+#         if user is None:
+#             raise serializers.ValidationError('Invalid Login Credentials')
+#         return user
+    
+    
+
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):

@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     'users',
     
+    
 
     'corsheaders',
     'rest_framework',
@@ -146,10 +147,15 @@ STATIC_ROOT = 'staticfiles'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_AUTH_SERIALIZERS = {
+    # 'LOGIN_SERIALIZER': 'users.serializers.LoginSerializer',
     'TOKEN_SERIALIZER': 'users.serializers.TokenSerializer',
     
 }
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_HEADERS = ['*']
-CORS_ORIGIN_WHITELIST = ('http://localhost:8081',)
+CORS_ORIGIN_WHITELIST = (   'http://localhost:8081',
+                            'http://localhost:9000', 
+                            'htpp://localhost', 
+                            'htpp://127.0.0.1'
+                        )

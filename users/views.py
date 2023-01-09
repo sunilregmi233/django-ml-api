@@ -5,6 +5,18 @@ from users.serializers import UserSerializer, UserProfileSerializer
 from rest_framework.permissions import AllowAny
 from users.permissions import IsLoggedInUserOrAdmin, IsAdminUser
 
+# from rest_framework.response import Response
+# from rest_framework.views import APIView
+
+# class LoginView(APIView):
+#     def post(self, request):
+#         serializer = LoginSerializer(data=request.data)
+#         if serializer.is_valid():
+#             user = serializer.validated_data
+#             # Generate a JWT token and return it in the response
+#             return Response({"token": generate_jwt_token(user)})
+#         return Response(serializer.errors, status=400)
+
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
