@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-lezfh%-9t9@b(14r)3n+v+-%fwf1t*2!q0tfp61kjto16--t83'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
 DEBUG = False
 
 
@@ -95,15 +95,23 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',  # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'API',                      # Or path to database file if using sqlite3.
+        'ENGINE': 'django.db.backends.mysql',  # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'sunilregmi233$API',                      # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
         'USER': 'sunilregmi233',
         'PASSWORD': 'Candy@871',
         'HOST': 'sunilregmi233.mysql.pythonanywhere-services.com',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-        'PORT': '',                      # Set to empty string for default.
+        'PORT': '3306',                      # Set to empty string for default.
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -138,20 +146,33 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
-
-STATIC_URL = 'static/'
-STATIC_ROOT = 'static'
+import os
+STATIC_URL = '/static/'
+STATIC_ROOT = '/static'
+# STATICFILES_DIRS = (
+#     os.path.join(BASE_DIR, 'static'),
+# )
 # STATIC_ROOT = "/var/www/example.com/static/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+REST_USE_JWT = True
+JWT_AUTH_COOKIE = 'jwt-auth'
+JWT_AUTH_REFRESH_COOKIE = 'my-refresh-token'
 
 REST_AUTH_SERIALIZERS = {
     # 'LOGIN_SERIALIZER': 'users.serializers.LoginSerializer',
     'TOKEN_SERIALIZER': 'users.serializers.TokenSerializer',
-    
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',
+    ]
+}
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'dj_rest_auth.jwt_auth.JWTCookieAuthentication',
+    )
 }
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
