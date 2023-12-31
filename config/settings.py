@@ -139,10 +139,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 import os
 STATIC_URL = '/static/'
-STATIC_ROOT = '/static'
-# STATICFILES_DIRS = (
-#     os.path.join(BASE_DIR, 'static'),
-# )
+STATIC_ROOT = '/static/'
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
 # STATIC_ROOT = "/var/www/example.com/static/"
 
 # Default primary key field type
@@ -169,3 +169,4 @@ CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_HEADERS = ['*']
 CORS_ORIGIN_WHITELIST = ('http://localhost:8081', 'http://localhost:9000', 'http://localhost')
+
