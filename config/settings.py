@@ -141,7 +141,7 @@ import os
 STATIC_URL = '/static/'
 STATIC_ROOT = 'static/'
 STATICFILES_DIRS = [
-    BASE_DIR + '/var/www/static/',
+    BASE_DIR '/var/www/static/',
 ]
 
 # Default primary key field type
