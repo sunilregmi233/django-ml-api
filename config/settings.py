@@ -43,6 +43,7 @@ INSTALLED_APPS = [
 
     'users',
     'OMS',
+    "citizenScience",
     
 
     'corsheaders',
@@ -55,6 +56,7 @@ INSTALLED_APPS = [
     'dj_rest_auth.registration', # new
     'drf_yasg',
 ]
+
 AUTH_USER_MODEL = 'users.User'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' # new
 SITE_ID = 1 # new
@@ -137,14 +139,14 @@ USE_I18N = True
 USE_TZ = True
 
 
-#### FOR DEVELOPMENT
+### FOR DEVELOPMENT
 # STATIC_URL = '/static/'
 # STATIC_ROOT = BASE_DIR / "static" # new
 # MEDIA_URL = '/media/'
 # MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
 
 
-### FOR PRODUCTION
+# ### FOR PRODUCTION
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / "staticfiles" # new
 STATICFILES_DIRS = [BASE_DIR / "static"]

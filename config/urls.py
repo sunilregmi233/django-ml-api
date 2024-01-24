@@ -38,7 +38,7 @@ schema_view = get_schema_view( # new
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/v1/', include('users.urls')),
-    # path('api/v1/', include('teachers.urls')),
+    path('api/v1/', include('citizenScience.urls')),
     # path('api/v1/', include('students.urls')),
     path('api-auth/', include('rest_framework.urls')),
     path('api/v1/dj-rest-auth/', include('dj_rest_auth.urls')), # new
