@@ -60,7 +60,6 @@ INSTALLED_APPS = [
 
 AUTH_USER_MODEL = 'users.User'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' # new
-SITE_ID = 1 # new
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
@@ -141,19 +140,19 @@ USE_TZ = True
 
 
 ### FOR DEVELOPMENT
-# STATIC_URL = '/static/'
-# STATIC_ROOT = BASE_DIR / "static" # new
-# MEDIA_URL = '/media/'
-# MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
+STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / "static" # new
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
 
 
 # ### FOR PRODUCTION
-STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / "staticfiles" # new
-STATICFILES_DIRS = [BASE_DIR / "static"]
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
+# STATIC_URL = '/static/'
+# STATIC_ROOT = BASE_DIR / "staticfiles" # new
+# STATICFILES_DIRS = [BASE_DIR / "static"]
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# MEDIA_URL = '/media/'
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
@@ -203,7 +202,9 @@ SOCIALACCOUNT_PROVIDERS = {
             'email',
         ],
         'AUTH_PARAMS': {
-            'access_type': 'online',
+            'access_type': 'offline',
         }
     }
 }
+
+SOCIALACCOUNT_STORE_TOKENS = True
