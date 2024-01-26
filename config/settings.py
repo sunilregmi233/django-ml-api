@@ -24,8 +24,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-lezfh%-9t9@b(14r)3n+v+-%fwf1t*2!q0tfp61kjto16--t83'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
-DEBUG = False
+DEBUG = True
+# DEBUG = False
 
 
 ALLOWED_HOSTS = ['*']
@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'allauth', # new
     'allauth.account', # new
     'allauth.socialaccount', # new
+    'allauth.socialaccount.providers.google',
     'dj_rest_auth.registration', # new
     'drf_yasg',
 ]
@@ -175,5 +176,31 @@ REST_FRAMEWORK = {
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_HEADERS = ['*']
-CORS_ORIGIN_WHITELIST = ('http://localhost:8081', 'http://localhost:9000', 'http://localhost')
+CORS_ORIGIN_WHITELIST = (
+    'http://localhost:8081', 
+    'http://localhost:9500', 
+    'http://localhost',
+    'http://192.168.101.32:9500',
+    'http://192.168.1.75:9500',
 
+)
+
+AUTHENTICATION_BACKENDS = (
+    # ...
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
+SITE_ID = 1
+
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        }
+    }
+}

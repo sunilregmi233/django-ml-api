@@ -3,10 +3,12 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from .views import DisasterViewSet
+from .views import google_login
 
 router = DefaultRouter()
 router.register(r'disasters', DisasterViewSet, basename='disaster')
 
 urlpatterns = [
     path('', include(router.urls)),
+    path('google-login/', google_login, name='google-login'),
 ]
