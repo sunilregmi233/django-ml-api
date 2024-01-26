@@ -140,19 +140,19 @@ USE_TZ = True
 
 
 ### FOR DEVELOPMENT
-STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / "static" # new
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
+# STATIC_URL = '/static/'
+# STATIC_ROOT = BASE_DIR / "static" # new
+# MEDIA_URL = '/media/'
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
 
 
 # ### FOR PRODUCTION
-# STATIC_URL = '/static/'
-# STATIC_ROOT = BASE_DIR / "staticfiles" # new
-# STATICFILES_DIRS = [BASE_DIR / "static"]
-# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-# MEDIA_URL = '/media/'
-# MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
+STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / "staticfiles" # new
+STATICFILES_DIRS = [BASE_DIR / "static"]
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
