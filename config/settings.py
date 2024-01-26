@@ -146,6 +146,7 @@ USE_TZ = True
 # MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
 
 
+
 # ### FOR PRODUCTION
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / "staticfiles" # new
