@@ -14,7 +14,6 @@ class DisasterViewSet(viewsets.ModelViewSet):
     serializer_class = DisasterSerializer
 
 
-@login_required
 def google_login(request):
     if request.method == 'POST':
         access_token = request.POST.get('access_token')
@@ -41,18 +40,19 @@ def google_login(request):
             social_account = SocialAccount.objects.create(user=user, provider='google', uid=google_data['sub'])
 
         # Save additional user data
-        first_name = google_data.get('givenName', '')
-        last_name = google_data.get('familyName', '')
-        username = first_name + last_name
-        user.username = username
+        # first_name = google_data.get('givenName', '')
+        # last_name = google_data.get('familyName', '')
+        # username = first_name + last_name
+        # user.username = username
         user.email = google_data.get('email', '')
         user.save()
+        print(user.email)
 
         return JsonResponse({
             'success': True,
             'user': {
                 'id': user.id,
-                'username': user.username,
+                # 'username': user.username,
                 'email': user.email,
             },
             'access_token': access_token,

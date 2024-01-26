@@ -180,10 +180,12 @@ CORS_ORIGIN_WHITELIST = (
     'http://localhost:8081', 
     'http://localhost:9500', 
     'http://localhost',
-    'http://192.168.101.32:9500',
-    'http://192.168.1.75:9500',
 
 )
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:9500",  # or your Vue.js app URL
+]
 
 AUTHENTICATION_BACKENDS = (
     # ...
