@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from allauth.socialaccount.models import SocialAccount
 from django.http import JsonResponse
 import requests
+import json
 
 class DisasterViewSet(viewsets.ModelViewSet):
     permission_classes = (IsLoggedInUserOrAdmin,)
@@ -14,9 +15,12 @@ class DisasterViewSet(viewsets.ModelViewSet):
     serializer_class = DisasterSerializer
 
 
+
 def google_login(request):
     if request.method == 'POST':
-        access_token = request.POST.get('access_token')
+        # Get the JSON data from the request body
+        data = json.loads(request.body.decode('utf-8'))
+        access_token = data.get('access_token')
         print(access_token)
 
         # Validate the access token with Google
@@ -40,8 +44,8 @@ def google_login(request):
             social_account = SocialAccount.objects.create(user=user, provider='google', uid=google_data['sub'])
 
         # Save additional user data
-        first_name = google_data.get('givenName', '')
-        last_name = google_data.get('familyName', '')
+        first_name = google_data.get('given_name', '')
+        last_name = google_data.get('family_name', '')
         username = first_name + last_name
         user.username = username
         user.email = google_data.get('email', '')
