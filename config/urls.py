@@ -40,7 +40,7 @@ urlpatterns = [
     path('api/v1/', include('users.urls')),
     path('api/v1/', include('citizenScience.urls')),
     # path('api/v1/', include('students.urls')),
-    path('api-auth/', include('rest_framework.urls')),
+    path('api/v1/api-auth/', include('rest_framework.urls')),
     path('api/v1/dj-rest-auth/', include('dj_rest_auth.urls')), # new
     path('api/v1/dj-rest-auth/registration/', include('dj_rest_auth.registration.urls')),
     path('swagger/', schema_view.with_ui( 'swagger', cache_timeout=0), name='schema-swagger-ui'),

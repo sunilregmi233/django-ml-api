@@ -635,6 +635,22 @@ files = [
 ]
 
 [[package]]
+name = "rest-social-auth"
+version = "8.3.0"
+description = "Django rest framework resources for social auth"
+optional = false
+python-versions = "*"
+files = [
+    {file = "rest_social_auth-8.3.0-py2.py3-none-any.whl", hash = "sha256:5eca2175df0a5257b255372bf095b65213e4545e5e853a0e4ff8d06be2185ed2"},
+]
+
+[package.dependencies]
+django = ">=3.2,<5.1"
+djangorestframework = "<4.0"
+social-auth-app-django = ">=5.0,<6.0"
+social-auth-core = ">=4.3,<5.0"
+
+[[package]]
 name = "ruamel-yaml"
 version = "0.17.21"
 description = "ruamel.yaml is a YAML parser/emitter that supports roundtrip preservation of comments, seq/map flow style, and map key order"
@@ -710,6 +726,48 @@ files = [
 ]
 
 [[package]]
+name = "social-auth-app-django"
+version = "5.4.0"
+description = "Python Social Authentication, Django integration."
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "social-auth-app-django-5.4.0.tar.gz", hash = "sha256:09ac02a063cb313eed5e9ef2f9ac4477c8bf5bbd685925ff3aba43f9072f1bbb"},
+    {file = "social_auth_app_django-5.4.0-py3-none-any.whl", hash = "sha256:28c65b2e2092f30cdb3cf912eeaa6988b49fdf4001b29bd89e683673d700a38e"},
+]
+
+[package.dependencies]
+Django = ">=3.2"
+social-auth-core = ">=4.4.1"
+
+[[package]]
+name = "social-auth-core"
+version = "4.4.2"
+description = "Python social authentication made simple."
+optional = false
+python-versions = ">=3.6"
+files = [
+    {file = "social-auth-core-4.4.2.tar.gz", hash = "sha256:9791d7c7aee2ac8517fe7a2ea2f942a8a5492b3a4ccb44a9b0dacc87d182f2aa"},
+    {file = "social_auth_core-4.4.2-py3-none-any.whl", hash = "sha256:ea7a19c46b791b767e95f467881b53c5fd0d1efb40048d9ed3dbc46daa05c954"},
+]
+
+[package.dependencies]
+cryptography = ">=1.4"
+defusedxml = ">=0.5.0rc1"
+oauthlib = ">=1.0.3"
+PyJWT = ">=2.0.0"
+python3-openid = ">=3.0.10"
+requests = ">=2.9.1"
+requests-oauthlib = ">=0.6.1"
+
+[package.extras]
+all = ["cryptography (>=2.1.1)", "python-jose (>=3.0.0)", "python3-saml (>=1.5.0)"]
+allpy3 = ["cryptography (>=2.1.1)", "python-jose (>=3.0.0)", "python3-saml (>=1.5.0)"]
+azuread = ["cryptography (>=2.1.1)"]
+openidconnect = ["python-jose (>=3.0.0)"]
+saml = ["python3-saml (>=1.5.0)"]
+
+[[package]]
 name = "sqlparse"
 version = "0.4.3"
 description = "A non-validating SQL parser."
@@ -761,4 +819,4 @@ socks = ["PySocks (>=1.5.6,!=1.5.7,<2.0)"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "b9f746cb5d4553e6308f1ea9839c6470670c900dad501d98f30ad9f8cdb090c5"
+content-hash = "51b8b2dbdc0be907b4b9d36ad667e082828c33b7c4565c470e20a7917cc90944"
