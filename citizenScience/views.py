@@ -29,13 +29,29 @@ def google_login(request):
         data = json.loads(request.body.decode('utf-8'))
         access_token = data.get('access_token')
         expires_in = data.get('expires_at')
+        email = data.get('email')
         expires_at = now + timedelta(seconds=expires_in)
         print(access_token)
+
+        # Check if the token already exists in SocialToken
+        user = User.objects.filter(email=email).first()
+
+        if user:
+            # Token already exists, return the existing token information
+            return JsonResponse({
+                'success': True,
+                'user': {
+                    'id': user.id,
+                    'username': user.username,
+                    'email': user.email,
+                },
+                'access_token': access_token,
+            })
 
         # Validate the access token with Google
         google_response = requests.get('https://www.googleapis.com/oauth2/v3/tokeninfo', params={'access_token': access_token})
         google_data = google_response.json()
-
+        print(google_data)
         if 'error_description' in google_data:
             return JsonResponse({'error': 'Invalid access token'})
 
@@ -46,7 +62,7 @@ def google_login(request):
             user = request.user
         else:
             # Create a new user
-            user = User.objects.create_user(username=google_data.get('email', ''), 
+            user = User.objects.create_user(username=google_data.get('email', ''),
                                             email=google_data.get('email', ''),
                                             password=make_password(None),
                                             )
@@ -63,9 +79,9 @@ def google_login(request):
         user.save()
 
         social_token, _ = SocialToken.objects.get_or_create(
-            account=social_account, token=access_token, 
-            app=social_app, 
-            expires_at = expires_at
+            account=social_account, token=access_token,
+            app=social_app,
+            expires_at=expires_at
         )
 
         return JsonResponse({
@@ -80,24 +96,3 @@ def google_login(request):
     else:
         return JsonResponse({'error': 'Invalid request method'})
     
-
-def google_logout(request):
-    if request.method == 'POST':
-        data = json.loads(request.body.decode('utf-8'))
-        email = data.get('email')
-        print(email)
-
-        try:
-            # Check if SocialToken with the provided access token exists
-            user = User.objects.get(email=email)
-
-            # Retrieve the associated user
-
-            # Delete the user
-            user.delete()
-
-            return JsonResponse({'success': True, 'message': 'User deleted successfully'})
-        except SocialToken.DoesNotExist:
-            return JsonResponse({'error': 'Invalid access token'})
-    else:
-        return JsonResponse({'error': 'Invalid request method'})

@@ -6,7 +6,7 @@ from rest_framework.permissions import AllowAny
 from users.permissions import IsLoggedInUserOrAdmin, IsAdminUser
 
 class UserViewSet(viewsets.ModelViewSet):
-   permission_classes = (IsAdminUser,)
+   permission_classes = (IsLoggedInUserOrAdmin,)
    queryset = User.objects.all()
    serializer_class = UserSerializer
 
@@ -24,7 +24,7 @@ class UserViewSet(viewsets.ModelViewSet):
 
 
 class UserProfileViewSet(viewsets.ModelViewSet):
-   permission_classes = (IsAdminUser,)
+   permission_classes = (IsLoggedInUserOrAdmin,)
 
    queryset = UserProfile.objects.all()
    serializer_class = UserProfileSerializer
